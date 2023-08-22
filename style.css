@@ -1,20 +1,3 @@
-/* .head {
-    border-style: dotted;
-}
-
-.head h1 {
-    color: crimson;
-    font-family: cursive;
-    text-align: center;
-    transform: translateY(100px);
-}
-
-.head h2 {
-    font-family:'Edu SA Beginner', cursive;
-    text-align: center;
-    transform: translateY(110px);
-} */
-
 body {
     background-color:honeydew;
 }
@@ -61,6 +44,75 @@ body {
     justify-content: center;
     align-items: center;
     transform: translateY(200px);
-    margin-left: 5%;
+    margin-left: 8%;
     font-size: large;
+}
+
+.Requirements {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Requirements_Box {
+    display: inline; /*originally was block*/
+    justify-content: center;
+    align-items: center;
+    transform: translateY(250px);
+    border-style: double;
+    border-radius: 15%;
+    border-width: 10px;
+    padding: 20px;
+    margin: auto;
+    /* text-align: center; */
+    background-color:bisque;
+}
+
+.Requirements_Box h2 {
+    font-family: monospace;
+    font-style: oblique;
+    color:black;
+    text-decoration: underline;
+}
+
+.Requirements_Box h2 #specifications {
+    color: rgb(217, 0, 255);
+    text-shadow: 1px 1px black;
+}
+
+#properties {
+    .property_labels {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        padding-right: 10px;
+        margin-bottom: 10px;
+    }
+
+    #length_textbox {
+        display: inline;
+        font-size: small;
+        transform: translateY(0%);
+        margin-left: 5px;
+    }
+    #save_button {
+        display: inline;
+        font-size: medium;
+        transform: translateY(0%);
+        margin-left: 5px;
+    }
+
+    #letters_label {
+        /* display: block; */
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        padding-right: 10px;
+        text-align: left;
+        margin-top: 10%;
+    }
+
+    #letters_checkbox {
+        display: inline;
+        transform: translateY(0%);
+        margin-inline-start: auto;
+
+    }
+    
 }

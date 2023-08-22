@@ -2,22 +2,40 @@ const password = document.getElementById("textbox");
 
 const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const lowerCase = "abcdefghijklmnopqrztuvwxyz";
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrztuvwxyz";
 const numbers = "0123456789";
 const symbol = "!@#$%^&*()_+-=|[]{};:',.<>?/~";
 
 const allChars = upperCase + lowerCase + numbers + symbol;
 
-function generate(length = 12) {
+function generate() {
+    const length = save() - 1;
+    if (length <= 0) {
+        alert("Must enter a length");
+    }
+    //Current obj: when a user inputs the length into the length_value textbox, you need to save it in some way,
+    //  either using a button press or event handler to do like a key event. Then, that needs to be used in the 
+    //  generate function, which then has to be displayed in the first textbox.
     let newStr = "";
-    newStr += upperCase.charAt(Math.floor(Math.random() * upperCase.length));
-    newStr += lowerCase.charAt(Math.floor(Math.random() * lowerCase.length));
-    newStr += numbers.charAt(Math.floor(Math.random() * numbers.length));
-    newStr += upperCase.charAt(Math.floor(Math.random() * upperCase.length));
+    // newStr += upperCase.charAt(Math.floor(Math.random() * upperCase.length));
+    // newStr += lowerCase.charAt(Math.floor(Math.random() * lowerCase.length));
+    // newStr += numbers.charAt(Math.floor(Math.random() * numbers.length));
+    // newStr += upperCase.charAt(Math.floor(Math.random() * upperCase.length));
     
     while (newStr.length <= length) {
-        newStr += allChars.charAt(Math.floor(Math.random() * allChars.length));
+        if (document.getElementById("letters_checkbox").checked == true) {
+            newStr += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+        } else {
+            newStr += allChars.charAt(Math.floor(Math.random() * allChars.length));
+        }
     }
     password.value = newStr;
+}
+
+
+function save() {
+    let savedLength = document.getElementById("length_textbox");
+    return savedLength.value;
 }
 
 

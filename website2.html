@@ -18,16 +18,34 @@
             </h2>
         </div>
     </div>
-    <!-- <div class="textfield"> -->
-        <div id= "box">
-            <input type="text" id= "textbox" placeholder="Password">
-            <button onclick="generate()">
-                Generate
-            </button>
-            <div>
+    <div id= "box">
+        <input type="text" id= "textbox" placeholder="Password">
+        <button onclick="generate()">
+            Generate
+        </button>
+    <div>
 
-
-    <!-- </div> -->
+    <div class="Requirements">
+        <div class="Requirements_Box">
+            <h2>
+                Enter your password <span id="specifications"> specifications </span>
+            </h2>
+            <div id="properties">
+                <!-- <div id="length"> -->
+                    <label class="property_labels">Enter length</label>
+                    <input type="text" id="length_textbox" placeholder="Enter length">
+                    <button id="save_button" onclick="save()">
+                        Save
+                    </button>
+                    <ul style="padding-left: 0px">
+                        <label class="property_labels" id="letters_label">
+                            Only Letters
+                        </label>
+                        <input type="checkbox" name="OnlyLetters" id="letters_checkbox">
+                    </ul>
+            </div>
+        </div>
+    </div>
     <script src="password.js"></script>
 </body>
 </html>
