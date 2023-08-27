@@ -1,84 +1,79 @@
 const password = document.getElementById("textbox");
 
-const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const lowerCase = "abcdefghijklmnopqrztuvwxyz";
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrztuvwxyz";
 const numbers = "0123456789";
 const symbol = "!@#$%^&*()_+-=|[]{};:',.<>?/~";
 
-const allChars = upperCase + lowerCase + numbers + symbol;
+const allChars = alphabet + numbers + symbol;
 
+/**
+ * Randomly chooses and concatonates characters based on filtering checkboxes (no checkboxes includes all characters).
+ * This function is called to show passoword in the "textbox" field.
+ */
 function generate() {
     const length = save() - 1;
     if (length <= 0) {
         alert("Must enter a length");
     }
     let newStr = "";
-        
+    let availableChars = allChars;
+
+    if (document.getElementById("letters_checkbox").checked) {
+        availableChars = alphabet;
+    }
+
+    if (document.getElementById("numbers_checkbox").checked) {
+        let wantedChars = alphabet + symbol;
+        availableChars = removeFromStr(wantedChars, availableChars);
+    }
+
+    if (document.getElementById("symbols_checkbox").checked) {
+        let wantedChars = alphabet + numbers;
+        availableChars = removeFromStr(wantedChars, availableChars);
+    }
+
     while (newStr.length <= length) {
-        //work on making sure when the numbers and symbols checkboxes are clicked only letters are generated
-        if ((document.getElementById("letters_checkbox").checked) || 
-            (document.getElementById("letters_checkbox").checked && document.getElementById("symbols_checkbox").checked && document.getElementById("numbers_checkbox".checked)) 
-            || (document.getElementById("symbols_checkbox").checked && document.getElementById("numbers_checkbox").checked)) {
-                newStr += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+        if (availableChars.length == 0) {
+            break;
         }
-         else if (document.getElementById("letters_checkbox").checked && document.getElementById("symbols_checkbox").checked) {
-            symbolNumbers = numbers + symbol;
-            character = allChars.charAt(Math.floor(Math.random() * allChars.length));
-            newStr += removeFromStr(character, symbolNumbers);  //password only has letters
-        } else if (document.getElementById("numbers_checkbox").checked) {
-            numbersExclude = numbers;
-            character = allChars.charAt(Math.floor(Math.random() * allChars.length));
-            newStr += removeFromStr(character, numbersExclude);  // password only has letters and symbols
-        } else if (document.getElementById("symbols_checkbox").checked) {
-            symbolsExclude = symbol;
-            character = allChars.charAt(Math.floor(Math.random() * allChars.length));
-            newStr += removeFromStr(character, symbolsExclude);  // password only has letters and numbers
-        }
-        else {
-            newStr += allChars.charAt(Math.floor(Math.random() * allChars.length));
+        let character = availableChars.charAt(Math.floor(Math.random() * availableChars.length));
+        newStr += character;
+
+        if (document.getElementById("letters_checkbox").checked 
+            && document.getElementById("numbers_checkbox").checked
+            && document.getElementById("symbols_checkbox").checked) {
+                availableChars = alphabet
         }
     }
+
     password.value = newStr;
 
 } 
 
-function removeFromStr(character, selectorString) { //allChars will be string
-    str = "";
-    if (!selectorString.includes(character)) {
-        str += character;
+/**
+ * Loops through available characters and adds necessary characters to a string us based on wanted characters
+ * @param {*} wantedCharacters resulting characters needed for specific checkbox
+ * @param {*} selectorString current available characters
+ * @returns 
+ */
+function removeFromStr(wantedCharacters, selectorString) {
+    let str = "";
+    for (let i = 0; i < selectorString.length; i++) {
+        if (wantedCharacters.includes(selectorString[i])) {
+            str += selectorString[i];
+        }
     }
     return str;
 }
 
 
+/**
+ * Saves the value entered into the length texbox
+ * @returns numberical value
+ */
 function save() {
     let savedLength = document.getElementById("length_textbox");
     return savedLength.value;
 }
-
-
-/**
- * You need to write regex that will validate a password to make sure it meets the following criteria:
-
-At least six characters long
-contains a lowercase letter
-contains an uppercase letter
-contains a digit
-only contains alphanumeric characters (note that '_' is not alphanumeric)
- */
-
-// const REGEXP = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9]{6,}$/;
-
-//Breakdown of code:
-
-// ^ -> start of input
-// (?=.*[a-z]) -> Positive lookahead with . and * (* -> matches preceeding character 1 or more times)
-//                and looks to see if there's at least one lowercase letter
-// (?=.*[A-Z]) -> Positive lookahead with . and * to see if there's at least one uppercase letter
-// (?=.*\d) -> Positive lookahead with . and * to see if there's at least one digit
-// [a-zA-Z0-9] -> Specifies only alphanumeric values (without _ which is included with /W)
-// {6,} -> Minimum of 6 characters long
-// $ -> End of input
 
 
