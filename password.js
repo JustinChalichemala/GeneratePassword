@@ -13,23 +13,42 @@ function generate() {
     if (length <= 0) {
         alert("Must enter a length");
     }
-    //Current obj: when a user inputs the length into the length_value textbox, you need to save it in some way,
-    //  either using a button press or event handler to do like a key event. Then, that needs to be used in the 
-    //  generate function, which then has to be displayed in the first textbox.
     let newStr = "";
-    // newStr += upperCase.charAt(Math.floor(Math.random() * upperCase.length));
-    // newStr += lowerCase.charAt(Math.floor(Math.random() * lowerCase.length));
-    // newStr += numbers.charAt(Math.floor(Math.random() * numbers.length));
-    // newStr += upperCase.charAt(Math.floor(Math.random() * upperCase.length));
-    
+        
     while (newStr.length <= length) {
-        if (document.getElementById("letters_checkbox").checked == true) {
-            newStr += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-        } else {
+        //work on making sure when the numbers and symbols checkboxes are clicked only letters are generated
+        if ((document.getElementById("letters_checkbox").checked) || 
+            (document.getElementById("letters_checkbox").checked && document.getElementById("symbols_checkbox").checked && document.getElementById("numbers_checkbox".checked)) 
+            || (document.getElementById("symbols_checkbox").checked && document.getElementById("numbers_checkbox").checked)) {
+                newStr += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+        }
+         else if (document.getElementById("letters_checkbox").checked && document.getElementById("symbols_checkbox").checked) {
+            symbolNumbers = numbers + symbol;
+            character = allChars.charAt(Math.floor(Math.random() * allChars.length));
+            newStr += removeFromStr(character, symbolNumbers);  //password only has letters
+        } else if (document.getElementById("numbers_checkbox").checked) {
+            numbersExclude = numbers;
+            character = allChars.charAt(Math.floor(Math.random() * allChars.length));
+            newStr += removeFromStr(character, numbersExclude);  // password only has letters and symbols
+        } else if (document.getElementById("symbols_checkbox").checked) {
+            symbolsExclude = symbol;
+            character = allChars.charAt(Math.floor(Math.random() * allChars.length));
+            newStr += removeFromStr(character, symbolsExclude);  // password only has letters and numbers
+        }
+        else {
             newStr += allChars.charAt(Math.floor(Math.random() * allChars.length));
         }
     }
     password.value = newStr;
+
+} 
+
+function removeFromStr(character, selectorString) { //allChars will be string
+    str = "";
+    if (!selectorString.includes(character)) {
+        str += character;
+    }
+    return str;
 }
 
 

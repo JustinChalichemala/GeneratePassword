@@ -103,16 +103,45 @@ body {
     #letters_label {
         /* display: block; */
         font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        padding-right: 10px;
         text-align: left;
         margin-top: 10%;
     }
 
     #letters_checkbox {
-        display: inline;
+        /* display: inline; */
         transform: translateY(0%);
         margin-inline-start: auto;
+        vertical-align: middle;
+    }
 
+    #symbols_label {
+        /* display: block; */
+        transform: translateY(20px);
+        position: relative;
+        left: 25%;
+    }
+
+    #symbols_checkbox {
+        /* display:inline; */
+        transform: translateY(0%);
+        margin-inline-start: auto;
+        vertical-align: middle;
+        position: relative;
+        left: 25%;
+    }
+
+    #numbers_label {
+        /* transform: translateY(10px); */
+        position: absolute;
+        bottom: 2px;
+        left: 30%;
     }
     
+    #numbers_checkbox {
+        position: relative;
+        left: 29%;
+        transform: translateY(25px);
+        /* margin-inline-start: auto; */
+        vertical-align: middle;
+    }
 }
